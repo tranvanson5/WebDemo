@@ -1,0 +1,55 @@
+/* Style cho container chứa checkbox */
+.checkbox-container {
+    display: block;
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* Style cho checkbox */
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Style cho checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border-radius: 3px;
+}
+
+/* Khi checkbox được chọn, thay đổi màu sắc của checkbox */
+.checkbox-container input:checked~.checkmark {
+    background-color: #2196F3;
+}
+
+/* Style cho checkmark bên trong checkbox */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Hiển thị checkmark khi checkbox được chọn */
+.checkbox-container input:checked~.checkmark:after {
+    display: block;
+}
+
+/* Style cho checkmark */
+.checkmark:after {
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}

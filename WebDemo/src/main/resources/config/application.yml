@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: WebDemo
+  profiles:
+    include:
+      - db
+      - sc
+#      - server
+#      - email
+#      - paypal
+  output:
+    ansi:
+      enabled: always

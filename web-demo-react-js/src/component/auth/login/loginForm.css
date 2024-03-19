@@ -1,0 +1,117 @@
+/* CSS for login form container */
+.login-form-container {
+    margin: 50px auto;
+    background-color: white;
+    width: 450px;
+    min-height: 550px;
+    box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 40px;
+}
+
+/* CSS for login title */
+.login-form-container .login-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+/* CSS for input fields */
+.login-form-container .input-field {
+    margin-bottom: 20px;
+}
+
+/* CSS for input fields inside form */
+.login-form-container form input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+/* CSS for login button */
+.login-form-container .button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* CSS for login button hover effect */
+.login-form-container .button:hover {
+    background-color: #0056b3;
+}
+
+/* CSS for link text for new account */
+.login-form-container .link-text-new-account {
+    display: block;
+    /* text-decoration: none; */
+    text-align: center;
+    font-size: 14px;
+    /* color: #333; */
+}
+
+.login-form-container .forgot-password {
+    display: block;
+    /* text-decoration: none; */
+    text-align: center;
+    font-size: 14px;
+    /* color: #333; */
+}
+
+/* CSS for login other container */
+.login-form-container .login-other-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* CSS for login other title */
+.login-form-container .login-other-container .login-other-title {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* CSS for login other links container */
+.login-form-container .login-other-container .login-other-links {
+    font-size: 28px;
+    margin: 10px;
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+}
+
+/* CSS for login other links */
+.login-form-container .login-other-container .login-other-links a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+/* CSS for login other links hover effect */
+.login-form-container .login-other-container .login-other-links a:hover {
+    color: #000;
+}
+
+/* CSS for FaGoogle icon */
+.login-form-container .login-other-container .login-other-links a:nth-child(1) svg {
+    color: #D95139;
+}
+
+/* CSS for FaFacebookF icon */
+.login-form-container .login-other-container .login-other-links a:nth-child(2) svg {
+    color: #0866FF;
+}
+
+/* CSS for FaGithub icon */
+.login-form-container .login-other-container .login-other-links a:nth-child(3) svg {
+    color: #000;
+}

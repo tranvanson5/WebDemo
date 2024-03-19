@@ -1,0 +1,52 @@
+/* dropdownclick.css */
+
+/* Container styles */
+.dropdown-click-container {
+    position: relative;
+    display: inline-block;
+    height: inherit;
+}
+
+/* Button styles */
+.dropdown-click-button {
+    background: none;
+    /* border: 1px solid #0a0a0a; */
+    border: none;
+    /* padding: 10px; */
+    cursor: pointer;
+    height: inherit;
+    width: auto;
+}
+
+/* Dropdown menu styles */
+.dropdown-menu {
+    min-width: 120px;
+
+    position: absolute;
+    top: 100%;
+    /* left: -80px; */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+/* List styles */
+.dropdown-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* List item styles */
+.dropdown-menu ul li {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* Hover effect for list items */
+.dropdown-menu ul li:hover {
+    background-color: #f0f0f0;
+}

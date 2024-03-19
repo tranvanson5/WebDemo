@@ -1,0 +1,49 @@
+/* RadioInput.css */
+.radio-input-container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.radio-input-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.radio-checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+.radio-input-container input:checked~.radio-checkmark {
+    background-color: #2196F3;
+}
+
+.radio-checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.radio-input-container input:checked~.radio-checkmark:after {
+    display: block;
+}
+
+.radio-checkmark:after {
+    top: 50%;
+    left: 50%;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+    transform: translate(-50%, -50%);
+}
