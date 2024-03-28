@@ -1,0 +1,19 @@
+<app-header></app-header>
+<div class="profile-container">
+    <div class="profile-left-container">
+        <app-avatar [imageUrl]="null" (fileValue)="handleFileValue($event)"></app-avatar>
+        <div class="text-container">
+            <p>tranvanson5</p>
+            <p>tranvanson5gmail.com</p>
+        </div>
+      <div class="text-container">
+        <a routerLink="/profile">Information</a>
+        <br>
+        <a routerLink="/profile/change-password">Change password</a>
+      </div>
+    </div>
+    <div class="profile-right-container">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+<app-footer></app-footer>

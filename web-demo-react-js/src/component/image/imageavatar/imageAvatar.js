@@ -1,18 +1,29 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './imageAvatar.css';
 
-function ImageAvatar({ onChange, urlImage = imageUrlDefault }) {
-    const [selectedImage, setSelectedImage] = useState(urlImage || null);
+const imageUrlDefault = "https://sm.ign.com/t/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.300.jpg";
 
+function ImageAvatar({ onChange, urlImage}) {
+    const [selectedImage, setSelectedImage] = useState( null);
+
+    useEffect(() => {
+        const setImage = async () => {
+            if (urlImage){
+                setSelectedImage(urlImage);
+            }else{
+                setSelectedImage(imageUrlDefault);
+            }
+        };
+        setImage();
+    }, [urlImage]);
     const handleImageChange = (event) => {
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
                 setSelectedImage(reader.result);
-                // Gọi hàm onChange và truyền URL của hình ảnh đã chọn
-                onChange(reader.result);
             };
+            onChange(file)
             reader.readAsDataURL(file);
         }
     };
@@ -31,10 +42,7 @@ function ImageAvatar({ onChange, urlImage = imageUrlDefault }) {
                 <img src={selectedImage} alt="Avatar" className="avatar-image" />
             )}
         </div>
-
     );
 }
 
 export default ImageAvatar;
-
-const imageUrlDefault= "https://sm.ign.com/t/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.300.jpg";

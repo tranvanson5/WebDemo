@@ -1,13 +1,18 @@
 export const postRequest = async (api, jwt, form) => {
     try {
+        const headers = {
+            'Content-Type': 'application/json'
+        };
+
+        if (jwt) {
+            headers['Authorization'] = `Bearer ${jwt}`;
+        }
+
         const response = await fetch(api, {
             method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${jwt}`,
-                'Content-Type': 'application/json'
-            },
-            credentials: 'include', // include cookies in the request
-            body: JSON.stringify(form)
+            headers: headers,
+            credentials: 'include',
+            body: JSON.stringify(form),
         });
 
         if (!response.ok) {
@@ -22,14 +27,19 @@ export const postRequest = async (api, jwt, form) => {
     }
 };
 
+
 export const getRequest = async (api, jwt) => {
     try {
+        const headers = {
+            'Content-Type': 'application/json'
+        };
+
+        if (jwt) {
+            headers['Authorization'] = `Bearer ${jwt}`;
+        }
         const response = await fetch(api, {
             method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${jwt}`,
-                'Content-Type': 'application/json'
-            },
+            headers: headers,
             credentials: 'include' // Include cookies in the request
         });
 

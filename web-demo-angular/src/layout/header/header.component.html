@@ -1,0 +1,20 @@
+<div class="header-container">
+  <div class="logo-container">
+    Logo
+  </div>
+  <div class="navigate-container">
+    <a routerLink="/" [ngClass]="['navigate', currentRoute=='/' ? 'active-link' : '']"> Home</a>
+    <a routerLink="/product" [ngClass]="['navigate', currentRoute=='/product' ? 'active-link' : '']">Product</a>
+    <a routerLink="/service" [ngClass]="['navigate', currentRoute=='/service' ? 'active-link' : '']">Service</a>
+    <a routerLink="/about" [ngClass]="['navigate', currentRoute=='/about' ? 'active-link' : '']">About</a>
+    <div class="user-menu">
+      <button [matMenuTriggerFor]="menu">
+        <img src="https://sm.ign.com/t/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.300.jpg" />
+      </button>
+      <mat-menu #menu="matMenu">
+        <a mat-menu-item routerLink="/profile">Profile</a>
+        <a mat-menu-item>Logout</a>
+      </mat-menu>
+    </div>
+  </div>
+</div>

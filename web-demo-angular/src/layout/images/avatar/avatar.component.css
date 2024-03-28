@@ -1,0 +1,42 @@
+.avatar-container {
+    position: relative;
+    box-sizing: border-box;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.avatar-container img {
+    margin: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    border-radius: 50%;
+    position: relative;
+    transition: opacity 0.3s;
+    width: calc(100% - 40px); /* Giảm kích thước tối đa của hình ảnh */
+    height: calc(100% - 40px); /* Giảm kích thước tối đa của hình ảnh */
+    box-sizing: border-box;
+    aspect-ratio: 1/1;
+}
+.avatar-container input {
+    display: none;
+}
+
+.avatar-container label {
+    background-color: #0193F5;
+    padding: 10px 20px;
+    border-radius: 5px;
+    position: absolute;
+    top: 50%; /* Align the top of the label to the middle of the image */
+    left: 50%; /* Align the left of the label to the middle of the image */
+    transform: translate(-50%, -50%); /* Translate the label back by half its width and height to center it */
+    display: none;
+    cursor: pointer;
+}
+
+.avatar-container:hover img {
+    opacity: 0.7; /* Reduce opacity of the image on hover */
+}
+
+.avatar-container:hover label {
+    display: block;
+    opacity: 1; /* Ensure label is fully visible on hover */
+}

@@ -2,9 +2,11 @@ package org.example.webdemo.authen.service.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.webdemo.authen.service.userdetails.UserDetailsServiceImpl;
+import org.example.webdemo.utils.HTTPonly.HttpOnlyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,9 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
+    @Autowired
+    private HttpOnlyService httpOnlyService;
+
     private static final Logger logger = LoggerFactory.getLogger(JwtAuthTokenFilter.class);
 
 
@@ -44,8 +49,9 @@ public class JwtAuthTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
 
+            Cookie cookie = httpOnlyService.getCookie(request,"accessToken");
             String jwt = getJwt(request);
-            if (jwt != null && tokenProvider.validateJwtToken(jwt)) {
+            if (jwt != null && cookie!= null && tokenProvider.validateJwtToken(jwt)&&jwt.equals(cookie.getValue())) {
                 String username = tokenProvider.getUserNameFromJwtToken(jwt);
 
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);

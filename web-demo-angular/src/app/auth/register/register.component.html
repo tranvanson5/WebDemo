@@ -1,0 +1,46 @@
+<div class="login-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <p>Register</p>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="registerForm" (ngSubmit)="handleSubmit()">
+        <mat-form-field appearance="outline" floatLabel="always">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" type="text" placeholder="Enter your name">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" floatLabel="always">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" type="text" placeholder="Enter your username">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" floatLabel="always">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="text" placeholder="Enter your email">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" floatLabel="always">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'" placeholder="Enter your password">
+          <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" class="button-icon-password">
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </mat-form-field>
+        <mat-form-field appearance="outline" floatLabel="always">
+          <mat-label>Re password</mat-label>
+          <input matInput formControlName="repassword" [type]="hidePassword ? 'password' : 'text'" placeholder="Enter your re password">
+          <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" class="button-icon-password">
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+        </mat-form-field>
+        <p class="button-register-container">
+          <button mat-raised-button color="primary" type="submit">Register</button>
+        </p>
+      </form>
+      <p class="link-register-container"><a routerLink="/auth/login">I already have an account</a></p>
+    </mat-card-content>
+  </mat-card>
+</div>

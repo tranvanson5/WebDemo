@@ -1,0 +1,65 @@
+.header-container {
+  width: 100%;
+  height: 80px;
+  background-color: rgb(204, 203, 203);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center; /* Canh giữa theo chiều dọc */
+  justify-content: space-between; /* Căn chỉnh giữa các phần tử */
+  padding: 0 20px; /* Khoảng cách padding bên trái và bên phải */
+}
+
+.logo-container {
+  width: 120px;
+}
+
+.navigate-container {
+  display: flex;
+  height: 100%;
+  font-size: 14px;
+}
+
+.navigate {
+  text-decoration: none; /* Loại bỏ gạch chân trên các liên kết */
+  color: white; /* Màu chữ trắng */
+  cursor: pointer;
+  width: 100px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+}
+.active-link{
+  background-color: #555;
+}
+.navigate:hover {
+  background-color: #b6b4b4;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center; /* Căn giữa theo chiều dọc */
+}
+
+.user-menu button {
+  height: 60px; /* Định nghĩa chiều cao của nút */
+  width: 60px; /* Định nghĩa chiều rộng của nút */
+  background: none;
+  box-sizing: border-box;
+  border: none; /* Loại bỏ đường viền */
+  padding: 0; /* Loại bỏ padding */
+  /*margin-top: 5px;*/
+}
+
+.user-menu button:hover {
+  background: none;
+}
+
+.user-menu button img {
+  height: 100%;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  border: 1px solid white;
+}

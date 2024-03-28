@@ -9,6 +9,7 @@ import ContactPage from "../page/user/contactpage/contractPage";
 import AuthPage from "../page/auth/authPage";
 import LoginPage from "../page/auth/login/loginPage";
 import RegisterPage from "../page/auth/register/registerPage";
+import ChangePassword from "../page/profile/changepassword/changePassword";
 
 export const routes = createBrowserRouter([
     {
@@ -41,6 +42,10 @@ export const routes = createBrowserRouter([
             {
                 path: '',
                 element: <ProfileDetailPage></ProfileDetailPage>
+            },
+            {
+                path: 'change-password',
+                element: <ChangePassword></ChangePassword>
             },
         ]
 

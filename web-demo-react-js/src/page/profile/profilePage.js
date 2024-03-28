@@ -1,12 +1,15 @@
 // ProfilePage.js
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Link, Outlet } from "react-router-dom";
 import Header from '../../component/header/header';
 import Footer from '../../component/footer/footer';
 import './profilePage.css';
 import ProfileAvatar from '../../component/profile/profileavatar/profileAvatar';
-
+import {useSelector} from "react-redux";
+import {useAuthorization} from "../../service/useAuthorization";
 function ProfilePage() {
+    const user = useSelector(state => state?.auth?.login?.user);
+    useAuthorization(["ROLE_ADMIN", "ROLE_PM", "ROLE_USER"]);
     return (
         <div className="profile-page-container">
             <Header />
@@ -16,11 +19,16 @@ function ProfilePage() {
                         <ProfileAvatar />
                     </div>
                     <div className="profile-info">
-                        <p>UserName</p>
-                        <p>Email@gmail.com</p>
+                        <p><b>{user?.username}</b></p>
+                        <p>{user?.email}</p>
                     </div>
                     <div className="change-password-link">
-                        <Link to="#">Change password</Link>
+                        <p style={{textAlign:"center"}}>
+                            <Link to="/profile">Information</Link>
+                        </p>
+                        <p style={{textAlign: "center"}}>
+                            <Link to="/profile/change-password">Change password</Link>
+                        </p>
                     </div>
                 </div>
                 <div className='profile-right'>

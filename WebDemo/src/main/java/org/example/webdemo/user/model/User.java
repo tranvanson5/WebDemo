@@ -28,6 +28,7 @@ public class User {
     private LocalDate dob;
     @Enumerated(EnumType.STRING)
     private UserGender gender;
+    private String phone;
     @Column(columnDefinition = "text")
     private String address;
     @Column(columnDefinition = "text")

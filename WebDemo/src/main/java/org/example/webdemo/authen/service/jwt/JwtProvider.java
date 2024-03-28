@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.example.webdemo.authen.service.userdetails.UserPrinciple;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -16,7 +17,12 @@ import java.util.concurrent.TimeUnit;
 public class JwtProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtProvider.class);
-    private String jwtSecretKey = "E1F6927F83B8FD0AED570AD21FA19871006B837A01FF773C036FFDEA1BCCE08ByYRlDlY3A6mBPO9QAlQVRvFfVD52rDLNcqWK5AIucS8lWRV1D8Dk";
+
+    @Value("${security.jwt.secret}")
+    private final String jwtSecretKey = null;
+
+    @Value("${security.jwt.expired}")
+    private final Long expired = null;
 
     private static final String TOKEN_PREFIX = "Bearer ";
     private static final String HEADER_STRING = "Authorization";
@@ -27,7 +33,7 @@ public class JwtProvider {
         return Jwts.builder()
                 .setSubject(userPrincipal.getUsername())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(30)))
+                .setExpiration(new Date(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(expired)))
                 .signWith(SignatureAlgorithm.HS512, jwtSecretKey)
                 .compact();
 
@@ -58,6 +64,10 @@ public class JwtProvider {
                 .getSubject();
     }
 
+    public Date extractExpiration(String jwtToken, String secretKey) {
+        Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken);
+        return claims.getBody().getExpiration();
+    }
     public String resolveToken(HttpServletRequest request) {
         String bearerToken = request.getHeader(HEADER_STRING);
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(TOKEN_PREFIX)) {

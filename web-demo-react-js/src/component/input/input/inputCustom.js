@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './inputCustom.css';
 
-function InputCustom({ value, onChange, placeholder = 'Enter text', label = '', style = {}, type = 'text', name = '' }) {
+function InputCustom({ value, onChange, placeholder = 'Enter text', label = '', style = {}, type = 'text', name = '', disabled = false }) {
     const [showPassword, setShowPassword] = useState(false);
 
     const toggleShowPassword = () => {
@@ -10,7 +10,7 @@ function InputCustom({ value, onChange, placeholder = 'Enter text', label = '', 
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-        onChange({ name, value });
+        onChange({ name, value }); // Pass name and value as an object
     };
 
     return (
@@ -25,6 +25,7 @@ function InputCustom({ value, onChange, placeholder = 'Enter text', label = '', 
                     className="custom-input"
                     placeholder={placeholder}
                     name={name}
+                    disabled={disabled}
                 />
                 {
                     type === 'password' && (

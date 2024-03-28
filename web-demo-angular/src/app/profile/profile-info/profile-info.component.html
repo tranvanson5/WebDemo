@@ -1,0 +1,49 @@
+<div class="form-container">
+  <form [formGroup]="profileForm" (ngSubmit)="handleSubmit()">
+    <p class="title-container">Profile</p>
+    <div class="input-container">
+      <p class="input-title">Name</p>
+      <mat-form-field appearance="outline" floatLabel="auto">
+        <input matInput formControlName="name" type="text" placeholder="Enter your name">
+      </mat-form-field>
+    </div>
+
+    <div class="input-container" style="margin-bottom: 20px;">
+      <p class="input-title">Gender</p>
+      <mat-radio-group appearance="outline" aria-label="Select an option" formControlName="gender">
+        <mat-radio-button value="MALE">Male</mat-radio-button>
+        <mat-radio-button value="FEMALE">Female</mat-radio-button>
+        <mat-radio-button value="OTHER">Other</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="input-container">
+      <p class="input-title">Date of birthday</p>
+      <mat-form-field appearance="outline">
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="dob">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+
+    <div class="input-container">
+      <p class="input-title">Phone</p>
+      <mat-form-field appearance="outline" floatLabel="auto">
+        <input matInput formControlName="phone" type="text" placeholder="Enter your phone">
+      </mat-form-field>
+    </div>
+
+    <div class="input-container">
+      <p class="input-title">Address</p>
+      <mat-form-field appearance="outline" floatLabel="auto">
+        <input matInput formControlName="address" type="text" placeholder="Enter your address">
+      </mat-form-field>
+    </div>
+
+    <div class="button-container">
+      <button mat-flat-button color="primary" type="submit">Save profile</button>
+    </div>
+
+  </form>
+</div>

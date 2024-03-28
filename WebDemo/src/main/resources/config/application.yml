@@ -6,7 +6,7 @@ spring:
       - db
       - sc
 #      - server
-#      - email
+      - email
 #      - paypal
   output:
     ansi:

@@ -12,8 +12,10 @@ public class ProfileRes {
     private String name;
     private LocalDate dob;
     private UserGender gender;
+    private String phone;
     private String address;
     private String email;
     private String username;
+    private String avatar;
     private LocalDateTime createdAt;
 }

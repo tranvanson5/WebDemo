@@ -1,0 +1,6 @@
+<!-- avatar.component.html -->
+<div class="avatar-container">
+    <img [src]="imageUrl ||imageUrlDefault" />
+    <input type="file" id="input" (change)="onFileChange($event)" />
+    <label for="input">Upload</label>
+</div>
