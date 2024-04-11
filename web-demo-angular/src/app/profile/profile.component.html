@@ -1,10 +1,10 @@
 <app-header></app-header>
 <div class="profile-container">
     <div class="profile-left-container">
-        <app-avatar [imageUrl]="null" (fileValue)="handleFileValue($event)"></app-avatar>
+        <app-avatar [imageUrl]="profile?.avatar" (fileValue)="handleFileValue($event)"></app-avatar>
         <div class="text-container">
-            <p>tranvanson5</p>
-            <p>tranvanson5gmail.com</p>
+            <p>{{profile?.username}}</p>
+            <p>{{profile?.email}}</p>
         </div>
       <div class="text-container">
         <a routerLink="/profile">Information</a>

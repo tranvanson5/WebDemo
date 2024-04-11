@@ -3,6 +3,7 @@ package org.example.webdemo.authen.service.jwt;
 import io.jsonwebtoken.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.example.webdemo.authen.service.userdetails.UserPrinciple;
+import org.example.webdemo.user.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,6 +38,15 @@ public class JwtProvider {
                 .signWith(SignatureAlgorithm.HS512, jwtSecretKey)
                 .compact();
 
+    }
+    public String generateJwtTokenOauth(User user){
+        String username = user.getUsername();
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(expired)))
+                .signWith(SignatureAlgorithm.HS512, jwtSecretKey)
+                .compact();
     }
 
     public boolean validateJwtToken(String authToken) {

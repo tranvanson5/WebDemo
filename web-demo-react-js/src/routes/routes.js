@@ -1,5 +1,5 @@
-import { createBrowserRouter } from "react-router-dom";
-import HomePage, { homePage } from '../page/user/homepage/homePage'
+import {createBrowserRouter, Navigate} from "react-router-dom";
+import HomePage  from '../page/user/homepage/homePage'
 import UserPage from "../page/user/userPage";
 import ProfilePage from "../page/profile/profilePage";
 import ProfileDetailPage from "../page/profile/profiledetail/profileDetailPage";
@@ -10,6 +10,9 @@ import AuthPage from "../page/auth/authPage";
 import LoginPage from "../page/auth/login/loginPage";
 import RegisterPage from "../page/auth/register/registerPage";
 import ChangePassword from "../page/profile/changepassword/changePassword";
+import ForgotPasswordPage from "../page/auth/forgotPassword/forgotPasswordPage";
+import ResetNewPassword from "../page/auth/forgotPassword/changePassword/resetNewPassword";
+import Logout from "../component/auth/logout/logout";
 
 export const routes = createBrowserRouter([
     {
@@ -55,14 +58,35 @@ export const routes = createBrowserRouter([
         element: <AuthPage></AuthPage>,
         children: [
             {
+                path: '',
+                element: <Navigate to="login" />,
+            },
+            {
                 path: 'login',
                 element: <LoginPage></LoginPage>
             },
             {
+                path: 'logout',
+                element: <Logout></Logout>,
+                children:[{
+                    path:'',
+                    element:<LoginPage></LoginPage>
+                }]
+            },
+            {
                 path: 'register',
                 element: <RegisterPage></RegisterPage>
-            }
+            },
+            {
+                path: 'forgot-password',
+                element: <ForgotPasswordPage></ForgotPasswordPage>
+            },
+            {
+                path: 'forgot-password/change-password',
+                element: <ResetNewPassword></ResetNewPassword>
+            },
 
         ]
-    }
+    },
+
 ]);

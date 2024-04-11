@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { RouterProvider } from 'react-router-dom';
 import { routes } from './routes/routes';
@@ -11,11 +10,15 @@ import React from "react";
 
 function App() {
   return (
-      <Provider store={store}>
-          <ToastContainer></ToastContainer>
-          <RouterProvider router={routes} />
-          <PersistGate loading={null} persistor={persistStore(store)}/>
-      </Provider>
+          <Provider store={store}>
+              <ToastContainer
+                  limit={true}
+                  pauseOnHover={false}
+
+              ></ToastContainer>
+              <RouterProvider router={routes} />
+              <PersistGate loading={null} persistor={persistStore(store)}/>
+          </Provider>
   );
 }
 

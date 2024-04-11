@@ -1,0 +1,16 @@
+<div class="class-dialog-container">
+  <h2 mat-dialog-title>Confirm</h2>
+  <mat-dialog-content>
+    <span>
+      <p>Otp</p>
+      <p>
+        <mat-form-field appearance="outline">
+          <input matInput [(ngModel)]="otp" type="number" placeholder="Enter your otp">
+        </mat-form-field>
+      </p>
+    </span>
+    <p>
+      <button mat-raised-button color="primary" (click)="handleSubmit()" >Submit</button>
+    </p>
+  </mat-dialog-content>
+</div>

@@ -5,6 +5,7 @@ spring:
     include:
       - db
       - sc
+      - session
 #      - server
       - email
 #      - paypal

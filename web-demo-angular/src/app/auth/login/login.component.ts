@@ -8,6 +8,9 @@ import {MatButtonModule} from "@angular/material/button";
 import {Router, RouterLink} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {ToastrModule, ToastrService} from "ngx-toastr";
+import { Observable } from 'rxjs';
+import { AuthStoreService } from '../service/store/auth-store.service';
+import {AuthService} from "../service/auth/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -26,11 +29,8 @@ import {ToastrModule, ToastrService} from "ngx-toastr";
   ]
 })
 export class LoginComponent {
-
-  constructor(private http:HttpClient,
-              private toastrService:ToastrService,
-              private router:Router,
-  ) {
+  constructor(private authService:AuthService,
+              private authStoreService:AuthStoreService) {
   }
   hidePassword: boolean = true;
   loginForm = new FormGroup(
@@ -48,22 +48,15 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       const username = this.loginForm.get('username')!.value;
       const password = this.loginForm.get('password')!.value;
-
-      // Use HttpClient directly or call a method in AuthService that uses HttpClient
-      this.http.post<any>('http://localhost:8080/auth/signin', { username, password }, { withCredentials: true })
-        .subscribe({
-          next: (response) => {
-            this.router.navigate(['../'])
-            this.toastrService.success("Login successful! Have a great day!","Login successful");
-            // this.treeStoreService.setNode("auth",{name:"login", response});
-          },
-          error: (error) => {
-            console.error('Login failed:', error);
-            // Handle login errors (display error messages, etc.)
-          }
-        });
+      const login = {username:username ||'', password: password ||''}
+      try {
+        this.authService.login(login);
+      } catch (error) {
+        console.error('Login error:', error);
+      }
     } else {
       console.error('Form is invalid');
+      // Display form validation errors to the user
     }
   }
 }

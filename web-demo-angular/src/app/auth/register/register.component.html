@@ -7,35 +7,87 @@
     </mat-card-header>
     <mat-card-content>
       <form [formGroup]="registerForm" (ngSubmit)="handleSubmit()">
-        <mat-form-field appearance="outline" floatLabel="always">
-          <mat-label>Name</mat-label>
-          <input matInput formControlName="name" type="text" placeholder="Enter your name">
-        </mat-form-field>
+        <p>
+          <span>
+            <p class="title">Name</p>
+            <p class="error">
+              <span>
+                <p *ngIf="registerForm.get('name')?.hasError('required') && registerForm.get('name')?.touched">Name is required</p>
+              </span>
+            </p>
+            <mat-form-field appearance="outline">
+              <input matInput formControlName="name" type="text" placeholder="Enter your name">
+            </mat-form-field>
+          </span>
+        </p>
 
-        <mat-form-field appearance="outline" floatLabel="always">
-          <mat-label>Username</mat-label>
+        <p>
+          <span>
+            <p class="title">Username</p>
+            <p class="error">
+              <span>
+                <p *ngIf="registerForm.get('username')?.hasError('required') && registerForm.get('username')?.touched">Username is required</p>
+                <p *ngIf="registerForm.get('username')?.hasError('minlength') && registerForm.get('username')?.touched">Username must be at least 8 characters long</p>
+              </span>
+            </p>
+            <mat-form-field appearance="outline">
           <input matInput formControlName="username" type="text" placeholder="Enter your username">
-        </mat-form-field>
+            </mat-form-field>
+          </span>
+        </p>
 
-        <mat-form-field appearance="outline" floatLabel="always">
-          <mat-label>Email</mat-label>
-          <input matInput formControlName="email" type="text" placeholder="Enter your email">
-        </mat-form-field>
+        <p>
+          <span>
+            <p class="title">Email</p>
+            <p class="error">
+              <span>
+                <p *ngIf="registerForm.get('email')?.hasError('required') && registerForm.get('email')?.touched">Email is required</p>
+                <p *ngIf="registerForm.get('email')?.hasError('email') && registerForm.get('email')?.touched">
+                              {{'Please enter a valid email address (e.g., johndoe@example.com).'}}
+                </p>
+              </span>
+            </p>
+            <mat-form-field appearance="outline">
+              <input matInput formControlName="email" type="text" placeholder="Enter your email">
+            </mat-form-field>
+          </span>
+        </p>
 
-        <mat-form-field appearance="outline" floatLabel="always">
-          <mat-label>Password</mat-label>
-          <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'" placeholder="Enter your password">
-          <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" class="button-icon-password">
-            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-          </button>
-        </mat-form-field>
-        <mat-form-field appearance="outline" floatLabel="always">
-          <mat-label>Re password</mat-label>
-          <input matInput formControlName="repassword" [type]="hidePassword ? 'password' : 'text'" placeholder="Enter your re password">
-          <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" class="button-icon-password">
-            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-          </button>
-        </mat-form-field>
+        <p>
+          <span>
+            <p class="title">Password</p>
+            <p class="error">
+              <span>
+                <p *ngIf="registerForm.get('password')?.hasError('required') && registerForm.get('password')?.touched">Password is required</p>
+                <p *ngIf="registerForm.get('password')?.hasError('minlength') && registerForm.get('password')?.touched">Password must be at least 8 characters long</p>
+              </span>
+            </p>
+            <mat-form-field appearance="outline">
+              <input matInput formControlName="password" [type]="hidePassword ? 'password' : 'text'" placeholder="Enter your password">
+             <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" class="button-icon-password">
+                <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+            </mat-form-field>
+          </span>
+        </p>
+
+        <p>
+          <span>
+            <p class="title">Re password</p>
+            <p class="error">
+              <span>
+                <p *ngIf="registerForm.get('repassword')?.hasError('required') && registerForm.get('repassword')?.touched">Re password is required</p>
+                <p *ngIf="registerForm.get('repassword')?.hasError('mismatch') && registerForm.get('repassword')?.touched">Passwords do not match. Please enter the password correctly.</p>
+              </span>
+            </p>
+            <mat-form-field appearance="outline">
+              <input matInput formControlName="repassword" [type]="hidePassword ? 'password' : 'text'" placeholder="Enter your re password">
+              <button mat-icon-button matSuffix (click)="togglePasswordVisibility()" class="button-icon-password">
+                <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+              </button>
+            </mat-form-field>
+          </span>
+        </p>
         <p class="button-register-container">
           <button mat-raised-button color="primary" type="submit">Register</button>
         </p>
@@ -44,3 +96,7 @@
     </mat-card-content>
   </mat-card>
 </div>
+
+
+
+

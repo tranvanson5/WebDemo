@@ -6,9 +6,9 @@ import { FaUser } from 'react-icons/fa';
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { logoutSuccess } from "../../store/slice/authSlice";
+import Logout from "../auth/logout/logout";
 
 function Header() {
-    const dispatch = useDispatch();
     const location = useLocation();
     const login = useSelector(state => state?.auth?.login);
     const userImage = <img src={login?.user?.avatar || userSrc} className='user-image'/>;
@@ -21,10 +21,6 @@ function Header() {
         }
     }
 
-    // Khai báo hàm handleLogout trước khi sử dụng
-    const handleLogout = () => {
-        dispatch(logoutSuccess());
-    }
 
     const content = (
         <>
@@ -32,7 +28,7 @@ function Header() {
                 <Link to={'/profile'} style={{ textDecoration: "none", color: "black"}}>Profile</Link>
             </li>
             <li>
-                <Link style={{ textDecoration: "none", color: "black" }} onClick={handleLogout}>Logout</Link>
+                <Link to={'/auth'} style={{ textDecoration: "none", color: "black" }}>Logout</Link>
             </li>
         </>
     );

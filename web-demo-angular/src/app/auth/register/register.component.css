@@ -42,4 +42,11 @@
   margin-top: 20px;
   margin-bottom: 20px;
 }
+.title{
+  font-size: 18px;
+}
+
+.error{
+  color: red;
+}
 

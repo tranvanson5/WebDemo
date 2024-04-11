@@ -7,14 +7,22 @@
     <a routerLink="/product" [ngClass]="['navigate', currentRoute=='/product' ? 'active-link' : '']">Product</a>
     <a routerLink="/service" [ngClass]="['navigate', currentRoute=='/service' ? 'active-link' : '']">Service</a>
     <a routerLink="/about" [ngClass]="['navigate', currentRoute=='/about' ? 'active-link' : '']">About</a>
-    <div class="user-menu">
-      <button [matMenuTriggerFor]="menu">
-        <img src="https://sm.ign.com/t/ign_nordic/cover/a/avatar-gen/avatar-generations_prsz.300.jpg" />
-      </button>
-      <mat-menu #menu="matMenu">
-        <a mat-menu-item routerLink="/profile">Profile</a>
-        <a mat-menu-item>Logout</a>
-      </mat-menu>
+    <div *ngIf="profile; then usermenublock;else loginlinkblock">
+
     </div>
+    <ng-template #usermenublock>
+      <div class="user-menu">
+        <button [matMenuTriggerFor]="menu">
+          <img [src]="profile?.avatar || avatarDefault" />
+        </button>
+        <mat-menu #menu="matMenu">
+          <a mat-menu-item routerLink="/profile">Profile</a>
+          <a mat-menu-item>Logout</a>
+        </mat-menu>
+      </div>
+    </ng-template>
+    <ng-template #loginlinkblock>
+      <a routerLink="/auth/login">Login</a>
+    </ng-template>
   </div>
 </div>

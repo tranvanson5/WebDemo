@@ -53,4 +53,13 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private UserStatus status;
+
+    public User() {
+    }
+
+    public User(String name, String email, String avatar) {
+        this.name = name;
+        this.email = email;
+        this.avatar = avatar;
+    }
 }

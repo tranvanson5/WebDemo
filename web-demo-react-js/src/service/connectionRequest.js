@@ -19,7 +19,12 @@ export const postRequest = async (api, jwt, form) => {
             throw new Error(`Failed to fetch: ${response.status} ${response.statusText}`);
         }
 
-        const data = await response.json();
+        let data;
+        try {
+            data = await response.json();
+        } catch (error) {
+            console.warn('Response data may not be JSON');
+        }
         return data;
     } catch (error) {
         console.error('Error while making POST request:', error);
@@ -46,8 +51,12 @@ export const getRequest = async (api, jwt) => {
         if (!response.ok) {
             throw new Error(`Failed to fetch: ${response.status} ${response.statusText}`);
         }
-
-        const data = await response.json();
+        let data;
+        try {
+            data = await response.json(); // Attempt to parse as JSON first
+        } catch (error) {
+            console.warn('Response data may not be JSON');
+        }
         return data;
     } catch (error) {
         console.error('Error while making GET request:', error);
