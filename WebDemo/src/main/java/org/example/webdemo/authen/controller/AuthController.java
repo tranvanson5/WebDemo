@@ -1,17 +1,11 @@
 package org.example.webdemo.authen.controller;
 
-import com.google.common.net.HttpHeaders;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import org.example.webdemo.authen.dto.req.IdTokenRequestDto;
 import org.example.webdemo.authen.dto.req.SetChangePassword;
 import org.example.webdemo.authen.dto.req.SignInReq;
 import org.example.webdemo.authen.dto.req.SignUpReq;
 import org.example.webdemo.authen.service.auth.AuthService;
-import org.example.webdemo.authen.service.oauth2.LoginWithGoogleOauth2Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,9 +15,6 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
     @Autowired
     private AuthService authService;
-
-    @Autowired
-    private LoginWithGoogleOauth2Service loginOAuthGoogle;
 
     @PostMapping("/signin")
     public ResponseEntity<?> signIn(@RequestBody SignInReq signInRequest,HttpServletResponse response){
@@ -54,11 +45,4 @@ public class AuthController {
     public ResponseEntity<?> changePassword (@RequestBody SetChangePassword setChangePassword){
         return authService.changePassword(setChangePassword);
     }
-
-    @PostMapping("oauth/google")
-    public ResponseEntity LoginWithGoogleOauth2(@RequestBody IdTokenRequestDto requestBody, HttpServletResponse response) {
-        return loginOAuthGoogle.loginOAuthGoogle(requestBody,response);
-    }
-
-
 }

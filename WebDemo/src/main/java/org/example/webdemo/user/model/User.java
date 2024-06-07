@@ -1,12 +1,15 @@
 package org.example.webdemo.user.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.example.webdemo.authen.model.Role;
+import org.example.webdemo.user.constain.RegistrationSource;
 import org.example.webdemo.user.constain.UserGender;
 import org.example.webdemo.user.constain.UserStatus;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
+
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -37,9 +40,22 @@ public class User {
     private String email;
     @Column(unique = true)
     private String username;
+
+    @JsonIgnore
     private String password;
+
+    @JsonIgnore
+    private String userPassword;
+
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+//    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+//    @JsonManagedReference
+//    private Set<Product> products = new HashSet<>();
+
+    @Enumerated(EnumType.STRING)
+    private RegistrationSource source;
 
 
 
@@ -54,12 +70,4 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserStatus status;
 
-    public User() {
-    }
-
-    public User(String name, String email, String avatar) {
-        this.name = name;
-        this.email = email;
-        this.avatar = avatar;
-    }
 }

@@ -6,6 +6,7 @@ import {postRequest} from "../../../service/connectionRequest";
 import { userSuccess} from "../../../store/slice/authSlice";
 import FirebaseFileUploader from "../../image/firebase/uploadFirebase";
 import {toast} from "react-toastify";
+import {ApiAddress} from "../../../api/api";
 
 
 function ProfileAvatar() {
@@ -29,7 +30,7 @@ function ProfileAvatar() {
 
             const downloadURL = await FirebaseFileUploader(file,name);
     
-            await postRequest("http://localhost:8080/profile/upload/avatar", jwt, { avatar: downloadURL });
+            await postRequest(ApiAddress.profile.avatarUpload, jwt, { avatar: downloadURL });
 
             const newUser = { ...user, avatar: downloadURL };
             dispatch(userSuccess(newUser));

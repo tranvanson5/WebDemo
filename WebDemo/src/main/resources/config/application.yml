@@ -6,9 +6,9 @@ spring:
       - db
       - sc
       - session
-#      - server
+      - oauth2
       - email
-#      - paypal
+      - paypal
   output:
     ansi:
       enabled: always

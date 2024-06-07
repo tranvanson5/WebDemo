@@ -60,15 +60,9 @@ public class HttpOnlyServiceImpl implements HttpOnlyService {
             Cookie cookie = new Cookie(name, "");
             cookie.setMaxAge(0); // Expire the cookie immediately
             cookie.setHttpOnly(true); // Enhance security by preventing client-side scripting access
-
-            // Set the appropriate path based on your application's structure
-            // Consider using getContextPath() if necessary for dynamic path handling
             cookie.setPath("/"); // For cookies accessible across the entire application
-
             response.addCookie(cookie);
         } catch (Exception e) {
-            // Log the exception for debugging purposes (optional)
-            // LOGGER.error("Failed to delete cookie: " + e.getMessage(), e);
             throw new RuntimeException("Failed to delete cookie: " + e.getMessage(), e);
         }
     }

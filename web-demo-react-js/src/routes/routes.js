@@ -13,6 +13,9 @@ import ChangePassword from "../page/profile/changepassword/changePassword";
 import ForgotPasswordPage from "../page/auth/forgotPassword/forgotPasswordPage";
 import ResetNewPassword from "../page/auth/forgotPassword/changePassword/resetNewPassword";
 import Logout from "../component/auth/logout/logout";
+import ProductDetailPage from "../page/user/productpage/productdetailpage/productDetailPage";
+import Oauth2Github from "../component/auth/login/oauth2/oauth2Github";
+import CartPage from "../page/user/cartpage/cartPage";
 
 export const routes = createBrowserRouter([
     {
@@ -28,12 +31,20 @@ export const routes = createBrowserRouter([
                 element: <ProductPage></ProductPage>,
             },
             {
+                path: 'product/detail/:id',
+                element: <ProductDetailPage></ProductDetailPage>,
+            },
+            {
                 path: 'about',
                 element: <AboutPage></AboutPage>,
             },
             {
                 path: 'contact',
                 element: <ContactPage></ContactPage>,
+            },
+            {
+                path: 'cart',
+                element: <CartPage></CartPage>,
             }
         ]
 
@@ -63,7 +74,11 @@ export const routes = createBrowserRouter([
             },
             {
                 path: 'login',
-                element: <LoginPage></LoginPage>
+                element: <LoginPage></LoginPage>,
+                children:[{
+                    path: 'github',
+                    element: <Oauth2Github></Oauth2Github>
+                }]
             },
             {
                 path: 'logout',

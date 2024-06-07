@@ -1,10 +1,7 @@
 package org.example.webdemo.authen.service.auth;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.example.webdemo.authen.constain.RoleName;
 import org.example.webdemo.authen.dto.req.SetChangePassword;
 import org.example.webdemo.authen.dto.req.SignInReq;
@@ -19,7 +16,6 @@ import org.example.webdemo.utils.HTTPonly.HttpOnlyService;
 import org.example.webdemo.utils.OTPGenerator.OTPGenerator;
 import org.example.webdemo.utils.sendmail.EmailService;
 import org.example.webdemo.utils.session.SessionManager;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -64,25 +60,44 @@ public class AuthServiceImp implements AuthService {
     @Autowired
     private SessionManager sessionManager;
 
+    @Value("${security.defaultPassword}")
+    private String password;
+
     @Override
     public ResponseEntity<?> signIn(SignInReq signInRequest, HttpServletResponse response) {
         try {
-            Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(signInRequest.getUsername(), signInRequest.getPassword()));
-            String jwt = jwtProvider.generateJwtToken(authentication);
-            UserPrinciple userDetails = (UserPrinciple) authentication.getPrincipal();
-            Map<String, Object> responseMap = new HashMap<>();
-            responseMap.put("accessToken", jwt);
-            responseMap.put("roles", userDetails.getAuthorities());
-            Date expirationDate = jwtProvider.extractExpiration(jwt, jwtSecretKey);
-            long maxAgeInSeconds = (expirationDate.getTime() - System.currentTimeMillis()) / 1000;
-            httpOnlyService.setCookie(response, accessToken, jwt, (int) maxAgeInSeconds);
+            User user= userRepository.findByUsername(signInRequest.getUsername()).get();
+            if (passwordEncoder.matches(signInRequest.getPassword(), user.getUserPassword())) {
+                Authentication authentication = authenticationManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(signInRequest.getUsername(), password));
+                String jwt = jwtProvider.generateJwtToken(authentication);
+                UserPrinciple userDetails = (UserPrinciple) authentication.getPrincipal();
+                Map<String, Object> responseMap = new HashMap<>();
+                responseMap.put("accessToken", jwt);
+                responseMap.put("roles", userDetails.getAuthorities());
+                Date expirationDate = jwtProvider.extractExpiration(jwt, jwtSecretKey);
+                long maxAgeInSeconds = (expirationDate.getTime() - System.currentTimeMillis()) / 1000;
+                httpOnlyService.setCookie(response, accessToken, jwt, (int) maxAgeInSeconds);
 
-            return new ResponseEntity<>(responseMap, HttpStatus.OK);
+                return new ResponseEntity<>(responseMap, HttpStatus.OK);
+            }else {
+                return new ResponseEntity<>("Invalid username or password", HttpStatus.UNAUTHORIZED);
+            }
         } catch (AuthenticationException e) {
             return new ResponseEntity<>("Invalid username or password", HttpStatus.UNAUTHORIZED);
         } catch (Exception e) {
             return new ResponseEntity<>("Internal server error", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> signOut(HttpServletResponse response) {
+        try {
+            httpOnlyService.deleteCookie(response,accessToken);
+            return new ResponseEntity<>(HttpStatus.OK);
+        }catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("INTERNAL_SERVER_ERROR", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -120,10 +135,15 @@ public class AuthServiceImp implements AuthService {
 
             SignUpReq signUpReq = new ObjectMapper().readValue(decodedString, SignUpReq.class);
 
-            User user = new User();
 
-            BeanUtils.copyProperties(signUpReq, user);
-            user.setPassword(passwordEncoder.encode(signUpReq.getPassword()));
+            User user = new User();
+            user.setName(signUpReq.getName());
+            user.setEmail(signUpReq.getEmail());
+            user.setUsername(signUpReq.getUsername());
+            user.setUserPassword(passwordEncoder.encode(signUpReq.getPassword()));
+            user.setPassword(passwordEncoder.encode(password));
+
+
             Role userRole = roleRepository.findByName(RoleName.ROLE_USER)
                     .orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
 
@@ -187,7 +207,7 @@ public class AuthServiceImp implements AuthService {
                 return new ResponseEntity<>("No user found with the provided email", HttpStatus.BAD_REQUEST);
             }
             User user = userOptional.get();
-            user.setPassword(passwordEncoder.encode(setChangePassword.getPassword()));
+            user.setUserPassword(passwordEncoder.encode(setChangePassword.getPassword()));
             userRepository.save(user);
             sessionManager.deleteSession("forgotPasswordIsVerify");
             return new ResponseEntity<>(HttpStatus.OK);
@@ -197,15 +217,7 @@ public class AuthServiceImp implements AuthService {
         }
     }
 
-    @Override
-    public ResponseEntity<?> signOut(HttpServletResponse response) {
-        try {
-            httpOnlyService.deleteCookie(response,accessToken);
-            return new ResponseEntity<>(HttpStatus.OK);
-        }catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>("INTERNAL_SERVER_ERROR", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    public ResponseEntity<?> oauth2google(){
+        return null;
     }
-
 }

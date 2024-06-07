@@ -7,6 +7,7 @@ import Dialog from "../../../component/dialog/dialog";
 import CountdownTimer from "../../../component/timer/countdown/CountdownTimer";
 import '../../../component/button/buttonCustom.css'
 import {useNavigate} from "react-router-dom";
+import {ApiAddress} from "../../../api/api";
 const customStyles= {
     content: {
         height:'300px',
@@ -37,7 +38,7 @@ function ForgotPasswordPage() {
             }
 
             await getRequest(
-                `http://localhost:8080/auth/forgot-password?email=${email}`,
+                `${ApiAddress.auth.forgotPassword}?email=${email}`,
                 null
             );
 
@@ -61,7 +62,7 @@ function ForgotPasswordPage() {
         try {
             // Implement API call to verify OTP (replace with your actual API endpoint)
             await getRequest(
-                `http://localhost:8080/auth/forgot-password/verify?otp=${otp||''}`,
+                `${ApiAddress.auth.verifyForgotPassword}?otp=${otp||''}`,
                 null
             );
             toast.success("OTP verified successfully!");

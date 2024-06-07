@@ -1,13 +1,10 @@
 package org.example.webdemo.user.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import org.example.webdemo.user.dto.req.ChangePasswordReq;
 import org.example.webdemo.user.dto.req.ProfileReq;
 import org.example.webdemo.user.dto.res.ProfileRes;
 import org.example.webdemo.user.dto.res.UploadAvatar;
-import org.example.webdemo.user.repository.UserRepository;
 import org.example.webdemo.user.service.profile.ProfileService;
-import org.example.webdemo.utils.HTTPonly.HttpOnlyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

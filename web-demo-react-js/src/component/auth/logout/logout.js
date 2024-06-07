@@ -5,6 +5,7 @@ import { getRequest } from '../../../service/connectionRequest';
 import { logoutSuccess } from "../../../store/slice/authSlice";
 import { toast } from 'react-toastify';
 import {useAuthorization} from "../../../service/useAuthorization";
+import {ApiAddress} from "../../../api/api";
 
 const Logout = () => {
     const navigate = useNavigate();
@@ -16,8 +17,9 @@ const Logout = () => {
         const handleLogout = async () => {
             if (jwt) {
                 try {
-                    await getRequest("http://localhost:8080/auth/signout", jwt);
+                    await getRequest(ApiAddress.auth.logout, jwt);
                     dispatch(logoutSuccess());
+                    // window.localStorage.clear();
                     // toast.success('Logout successful');
                 } catch (error) {
                     navigate('../')

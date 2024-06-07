@@ -7,9 +7,9 @@ import './profilePage.css';
 import ProfileAvatar from '../../component/profile/profileavatar/profileAvatar';
 import {useSelector} from "react-redux";
 import {useAuthorization} from "../../service/useAuthorization";
-function ProfilePage() {
+function ProfilePage () {
     const user = useSelector(state => state?.auth?.login?.user);
-    useAuthorization(["ROLE_ADMIN", "ROLE_PM", "ROLE_USER"]);
+    // useAuthorization(["ROLE_ADMIN", "ROLE_PM", "ROLE_USER"]);
     return (
         <div className="profile-page-container">
             <Header />

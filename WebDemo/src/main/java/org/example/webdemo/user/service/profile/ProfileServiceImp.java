@@ -43,7 +43,7 @@ public class ProfileServiceImp implements ProfileService{
     }
 
     @Override
-    public ResponseEntity uploadAvatar(UploadAvatar uploadAvatar) {
+    public ResponseEntity<?> uploadAvatar(UploadAvatar uploadAvatar) {
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             UserPrinciple principal = (UserPrinciple) authentication.getPrincipal();
@@ -90,11 +90,11 @@ public class ProfileServiceImp implements ProfileService{
             Optional<User> userOptional = userRepository.findById(userId);
             if (userOptional.isPresent()) {
                 User user = userOptional.get();
-                boolean isOldPasswordCorrect = passwordEncoder.matches(changePasswordReq.getOldPassword(), user.getPassword());
+                boolean isOldPasswordCorrect = passwordEncoder.matches(changePasswordReq.getOldPassword(), user.getUserPassword());
                 if (!isOldPasswordCorrect) {
                     return new ResponseEntity<>("Incorrect old password",HttpStatus.BAD_REQUEST);
                 }
-                user.setPassword(passwordEncoder.encode(changePasswordReq.getNewPassword()));
+                user.setUserPassword(passwordEncoder.encode(changePasswordReq.getNewPassword()));
                 userRepository.save(user);
                 Map<String,String> map= new HashMap<>();
                 map.put("messenger","Password changed successfully");

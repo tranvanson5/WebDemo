@@ -23,8 +23,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         User user = userRepository.findByUsername(username).orElseThrow(
                 () -> new UsernameNotFoundException("User Not Found with -> username or email : " + username));
-        if (user.getStatus() == UserStatus.BLOCK) {
-            throw new LockedException("Account has been locked");
+
+
+        if (user.getStatus() != UserStatus.ACTIVE) {
+            if (user.getStatus() == UserStatus.BLOCK){
+                throw new LockedException("Account has been locked");
+            }
         }
         return UserPrinciple.build(user);
     }

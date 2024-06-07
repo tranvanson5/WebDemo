@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './inputCustom.css';
+import {IoMdEye, IoMdEyeOff} from "react-icons/io";
 
 function InputCustom({ value, onChange, placeholder = 'Enter text', label = '', style = {}, type = 'text', name = '', disabled = false }) {
     const [showPassword, setShowPassword] = useState(false);
@@ -29,8 +30,8 @@ function InputCustom({ value, onChange, placeholder = 'Enter text', label = '', 
                 />
                 {
                     type === 'password' && (
-                        <button onClick={toggleShowPassword} type='button'>
-                            {showPassword ? 'Hide' : 'Show'}
+                        <button onClick={toggleShowPassword} type='button' style={{color:"black", justifyContent:"center", display:"flex"}}>
+                            {showPassword ? <IoMdEye />: <IoMdEyeOff /> }
                         </button>
                     )
                 }

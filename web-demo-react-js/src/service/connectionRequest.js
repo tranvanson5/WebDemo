@@ -51,18 +51,24 @@ export const getRequest = async (api, jwt) => {
         if (!response.ok) {
             throw new Error(`Failed to fetch: ${response.status} ${response.statusText}`);
         }
+
         let data;
         try {
             data = await response.json(); // Attempt to parse as JSON first
         } catch (error) {
             console.warn('Response data may not be JSON');
         }
+
         return data;
     } catch (error) {
+        if (error.message === 'Failed to fetch') {
+            throw new Error('Network error occurred. Please check your internet connection and try again.');
+        }
         console.error('Error while making GET request:', error);
         throw error;
     }
 };
+
 
 export const putRequest = async (api, jwt, form) => {
     try {

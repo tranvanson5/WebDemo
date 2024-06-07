@@ -1,0 +1,86 @@
+:root {
+    --box-shadow-color: rgba(0, 0, 0, 0.02);
+    --border-color: rgba(27, 31, 35, 0.15);
+    --box-shadow-style: 0px 1px 3px 0px;
+    --border-style: 0px 0px 0px 1px;
+    --card-width: 230px;
+    --card-height: 300px;
+    --border-radius: 5px;
+
+}
+
+.card-container {
+    box-shadow: var(--box-shadow-color) var(--box-shadow-style), var(--border-color) var(--border-style);
+    width: var(--card-width);
+    height: var(--card-height);
+    border-radius: var(--border-radius);
+}
+
+.card-container a {
+    text-decoration: none;
+    color: black;
+}
+
+.card-container img {
+    width: 100% !important;
+    height: 150px;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    /*border-bottom: 1px solid #CCCBCB;*/
+}
+
+.card-container .card-content {
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+    padding: 10px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-container .card-content p {
+    text-align: center;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+.card-container .card-content .card-title {
+    width: 100%;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.card-container .card-content .card-price {
+    font-size: 14px;
+    width: 100%;
+    white-space: nowrap;
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-container .card-content .card-text {
+    font-size: 14px;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+.status-container{
+    color: white;
+    font-size: 13px;
+    position: absolute;
+    background: #318F56;
+    padding: 3px;
+    border-radius: 0 0 0 0;
+    bottom: 0;
+    right: 0;
+}

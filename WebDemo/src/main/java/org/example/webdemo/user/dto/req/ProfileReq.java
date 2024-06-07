@@ -4,7 +4,6 @@ import lombok.Data;
 import org.example.webdemo.user.constain.UserGender;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Data
 public class ProfileReq {

@@ -28,6 +28,9 @@ function Header() {
                 <Link to={'/profile'} style={{ textDecoration: "none", color: "black"}}>Profile</Link>
             </li>
             <li>
+                <Link to={'/cart'} style={{ textDecoration: "none", color: "black"}}>Cart</Link>
+            </li>
+            <li>
                 <Link to={'/auth'} style={{ textDecoration: "none", color: "black" }}>Logout</Link>
             </li>
         </>

@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 public interface ProfileService {
     ResponseEntity<ProfileRes> getProfile();
 
-    ResponseEntity uploadAvatar(UploadAvatar uploadAvatar);
+    ResponseEntity<?> uploadAvatar(UploadAvatar uploadAvatar);
 
     ResponseEntity<?> uploadProfile(ProfileReq profileReq);
 

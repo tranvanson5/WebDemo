@@ -3,6 +3,7 @@ import Dialog from "../../../../component/dialog/dialog";
 import {useState} from "react";
 import {postRequest} from "../../../../service/connectionRequest";
 import {useNavigate} from "react-router-dom";
+import {ApiAddress} from "../../../../api/api";
 
 function ResetNewPassword() {
     const [form,setForm] = useState({});
@@ -15,7 +16,7 @@ function ResetNewPassword() {
             if (form?.password !== form?.repassword) {
                 throw new Error("Passwords do not match");
             }
-            await postRequest(`http://localhost:8080/auth/forgot-password/change-password`, null, { password: form?.password });
+            await postRequest(`${ApiAddress.auth.resetPassword}`, null, { password: form?.password });
             console.log("Password reset request sent:", form?.password);
             alert("Password reset request sent successfully! (Replace with appropriate feedback)");
             navigate('/auth/login')

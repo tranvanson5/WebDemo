@@ -6,6 +6,7 @@ import Dialog from "../../dialog/dialog";
 import CountdownTimer from "../../timer/countdown/CountdownTimer";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {ApiAddress} from "../../../api/api";
 function Register() {
     const navigate = useNavigate();
     const [form, setForm] = useState({});
@@ -27,7 +28,7 @@ function Register() {
     };
 
     const handleSubmit = async () => {
-        await postRequest('http://localhost:8080/auth/signup', null, form);
+        await postRequest(ApiAddress.auth.register, null, form);
         toast.success("Send mail otp success")
         openModal();
     };
@@ -44,7 +45,7 @@ function Register() {
     };
 
     const reHandleSubmit = async () => {
-        await postRequest('http://localhost:8080/auth/signup', null, form);
+        await postRequest(ApiAddress.auth.register, null, form);
         setTime(60);
         setRestartCount(prevCount => prevCount + 1);
         toast.success("Send mail otp success")

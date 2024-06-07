@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { postRequest } from "../../../service/connectionRequest";
 import {userSuccess} from "../../../store/slice/authSlice";
 import {toast} from "react-toastify";
+import {ApiAddress} from "../../../api/api";
 
 function ProfileInfor() {
     const dispatch = useDispatch();
@@ -33,7 +34,7 @@ function ProfileInfor() {
     const onSubmit = async () => {
         try {
             setIsUpdate(false); // Reset isUpdate state
-            await postRequest("http://localhost:8080/profile/upload", jwt, form); // Perform POST request
+            await postRequest(ApiAddress.profile.profileUpload, jwt, form); // Perform POST request
             dispatch(userSuccess(form))
             toast.success("Upload information success!!!")
         } catch (error) {
@@ -56,6 +57,8 @@ function ProfileInfor() {
         { title: 'Female', value: 'FEMALE' },
         { title: 'Other', value: 'OTHER' }
     ];
+
+
 
     return (
         <div className="profile-infor-container">

@@ -1,0 +1,39 @@
+.pagination-container{
+    user-select: none;
+    display: flex;
+    height: 40px;
+    line-height: 40px;
+}
+
+.pagination-container .next-container,
+.pagination-container .prev-container {
+    user-select: none;
+    width: 60px;
+    background: linear-gradient(to right, #4CAF50, #2E8B57); /* Gradient màu nền */
+    color: #fff; /* Màu chữ */
+    border: none; /* Bỏ viền */
+    border-radius: 5px; /* Bo góc */
+    cursor: pointer; /* Con trỏ chuột khi hover */
+    font-size: 14px; /* Kích thước chữ */
+    text-align: center; /* Căn giữa chữ */
+    transition: background-color 0.3s; /* Hiệu ứng chuyển đổi màu nền */
+}
+
+.pagination-container .next-container:hover,
+.pagination-container .prev-container:hover {
+    background: linear-gradient(to right, #2E8B57, #4CAF50); /* Gradient màu nền khi hover */
+}
+
+.pagination-container .pagination-item{
+    width: 40px;
+    text-align: center;
+    margin-right: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+.pagination-item-current{
+    color: #ffffff;
+    background-color: #0077F6;
+    background: linear-gradient(to right, #f3a96e, #fa8b1c); /* Gradient màu nền */
+    border-radius: 5px;
+}

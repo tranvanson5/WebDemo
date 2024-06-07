@@ -1,8 +1,6 @@
 package org.example.webdemo.authen.service.auth;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.example.webdemo.authen.dto.req.SetChangePassword;
 import org.example.webdemo.authen.dto.req.SignInReq;
 import org.example.webdemo.authen.dto.req.SignUpReq;

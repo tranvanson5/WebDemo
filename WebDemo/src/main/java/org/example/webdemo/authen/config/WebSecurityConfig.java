@@ -31,21 +31,22 @@ public class WebSecurityConfig {
     @Autowired
     private JwtAuthTokenFilter jwtAuthFIlter;
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf(AbstractHttpConfigurer::disable)
+        return
+                httpSecurity.csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("/auth/signout").authenticated()
+                        .requestMatchers("/auth/signout","/profile/**").authenticated()
                         .requestMatchers("/auth/**", "/public/**").permitAll()
-                        .requestMatchers("/profile/**").authenticated()
                         .anyRequest().authenticated())
-
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
                 .authenticationProvider(authenticationProvider()).addFilterBefore(
                         jwtAuthFIlter, UsernamePasswordAuthenticationFilter.class
-                );
-        return httpSecurity.build();
+                ).build();
+
     }
     @Bean
     public AuthenticationProvider authenticationProvider() {
