@@ -16,8 +16,13 @@ function CardComponent({product, style, link = '#'}) {
                         alt=""
                     />
                     {
-                        product?.status == "OUT_OF_STOCK" && (
-                            <div className="status-container" style={{background: "#ea4d4d"}}>{product?.status}</div>
+                        product?.status != "AVAILABLE" && (
+                            <div className="status-container" style={{background: "Red"}}>{product?.status}</div>
+                        )
+                    }
+                    {
+                        product?.status == "AVAILABLE" && (
+                            <div className="status-container" style={{background: "Green"}}>{product?.status}</div>
                         )
                     }
                 </div>

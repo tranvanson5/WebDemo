@@ -1,24 +1,24 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import './productPage.css'
 import CardComponent from "../../../component/card/CardComponent";
 import PaginationComponent from "../../../component/pagination/PaginationComponent";
 import SearchComponent from "../../../component/search/SearchComponent";
-import {getRequest} from "../../../service/connectionRequest";
-import {useDispatch, useSelector} from "react-redux";
-import {listProducts} from "../../../store/slice/productSlice";
+import { getRequest } from "../../../service/connectionRequest";
+import { useDispatch, useSelector } from "react-redux";
+import { listProducts } from "../../../store/slice/productSlice";
 function ProductPage() {
     const dispatch = useDispatch();
     const productsPage = useSelector(state => state?.products?.products);
-    const [searchForm,setSearchForm] = useState({});
-    const [currentPage,setCurrentPage] = useState(0);
+    const [searchForm, setSearchForm] = useState({});
+    const [currentPage, setCurrentPage] = useState(0);
     useEffect(() => {
         getProductMethod();
-    }, [dispatch,searchForm,currentPage]);
+    }, [dispatch, searchForm, currentPage]);
     const getProductMethod = async () => {
-      const response= await getRequest(`http://localhost:8080/public/product?search=${searchForm?.search||''}&&size=10&&page=${currentPage}`,null);
-      dispatch(listProducts(response));
+        const response = await getRequest(`http://localhost:8080/public/product?search=${searchForm?.search || ''}&&size=10&&page=${currentPage}`, null);
+        dispatch(listProducts(response));
     }
-    const handleOnPageChange = (e) =>{
+    const handleOnPageChange = (e) => {
         setCurrentPage(e);
     }
     const handleSearch = (e) => {
@@ -32,8 +32,8 @@ function ProductPage() {
         if (prices.length > 1) {
             const minPrice = Math.min(...prices); // Giá thấp nhất
             const maxPrice = Math.max(...prices); // Giá cao nhất
-            return [minPrice,maxPrice];
-        } else  {
+            return [minPrice, maxPrice];
+        } else {
             return prices;
         }
     }
@@ -51,7 +51,8 @@ function ProductPage() {
                                     image: product?.image,
                                     title: product?.name,
                                     prices: handlePrice(product?.productDetails),
-                                    description: product?.shortDescription
+                                    description: product?.shortDescription,
+                                    status: product?.status
                                 }}
                                 link={`/product/detail/${product?.id}`}
                                 key={index}
@@ -64,9 +65,9 @@ function ProductPage() {
             <div className="pagination-product-container">
                 <PaginationComponent
                     onPageChange={handleOnPageChange}
-                    total={productsPage?.totalPages||1}
-                    current={productsPage?.numberOfElements||0}
-                    element={productsPage?.size||0}
+                    total={productsPage?.totalPages || 1}
+                    current={productsPage?.number || 0}
+                    element={5}
                 ></PaginationComponent>
             </div>
         </div>

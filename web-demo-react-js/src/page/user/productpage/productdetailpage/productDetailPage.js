@@ -123,19 +123,26 @@ function ProductDetailPage() {
                     </p>
 
                     <p className="text"><span>Create at: </span>{product?.createdAt}</p>
-                    <p className="text"
-                        style={{
-                            display: "-webkit-box",
-                            textOverflow: "ellipsis",
-                            WebkitLineClamp: 3,
-                            WebkitBoxOrient: "vertical"
-                        }}
+                    <p className="text short-description"
+                        // style={{
+                        //     display: "-webkit-box",
+                        //     textOverflow: "ellipsis",
+                        //     WebkitMaxInlineSize: "3",
+                        //     WebkitBoxOrient: "vertical"
+                        // }}
                     >
                         <span>Short description: </span>
                         {product?.shortDescription}
                     </p>
-                    <p className="text"><span>Status:</span> <span
-                        className="product-status-container">{product?.status}</span></p>
+                    <p className="text">
+                        <span>Status:</span>
+                        <span
+                            className="product-status-container"
+                            style={{ backgroundColor: product?.status === 'AVAILABLE' ? 'green' : 'red' }}
+                        >
+                            {product?.status}
+                        </span>
+                    </p>
                 </div>
             </div>
             <div className="product-detail-content2">
@@ -155,12 +162,12 @@ function ProductDetailPage() {
 
                             <div className="dialog-container-content">
                                 <div className="avatar-image-container" style={{ height: "200px", width: "100%", display: "flex", justifyContent: "center" }}>
-                                    <div style={{width:"auto"}}>
+                                    <div style={{ width: "auto" }}>
                                         <ImageSlide images={handleProductDetailImages(chooseProduct)} size={3}></ImageSlide>
                                     </div>
                                 </div>
-                                <p style={{fontSize:"18px",textAlign:'center', fontWeight:'600'}}>{chooseProduct?.name}</p>
-                                <p style={{textAlign:'center', fontWeight:'600'}}><b>Price: </b>{chooseProduct?.price}</p>
+                                <p style={{ fontSize: "18px", textAlign: 'center', fontWeight: '600' }}>{chooseProduct?.name}</p>
+                                <p style={{ textAlign: 'center', fontWeight: '600' }}><b>Price: </b>{chooseProduct?.price}</p>
                                 <div className='product-detail-choose-container'>
                                     {
                                         productAllDetails?.map((detail, index) => (
