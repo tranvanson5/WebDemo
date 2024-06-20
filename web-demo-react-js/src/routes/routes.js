@@ -16,6 +16,7 @@ import Logout from "../component/auth/logout/logout";
 import ProductDetailPage from "../page/user/productpage/productdetailpage/productDetailPage";
 import Oauth2Github from "../component/auth/login/oauth2/oauth2Github";
 import CartPage from "../page/user/cartpage/cartPage";
+import OrderPage from "../page/user/orderpage/orderPage";
 
 export const routes = createBrowserRouter([
     {
@@ -45,6 +46,10 @@ export const routes = createBrowserRouter([
             {
                 path: 'cart',
                 element: <CartPage></CartPage>,
+            },
+            {
+                path: 'order',
+                element: <OrderPage></OrderPage>,
             }
         ]
 

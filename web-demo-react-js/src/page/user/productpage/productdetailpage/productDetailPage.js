@@ -167,7 +167,7 @@ function ProductDetailPage() {
                                     </div>
                                 </div>
                                 <p style={{ fontSize: "18px", textAlign: 'center', fontWeight: '600' }}>{chooseProduct?.name}</p>
-                                <p style={{ textAlign: 'center', fontWeight: '600' }}><b>Price: </b>{chooseProduct?.price}</p>
+                                <p style={{ textAlign: 'center', fontWeight: '600' }}><b>Price: </b>{formatNumberWithCommas(chooseProduct?.price)||0} <b>VNĐ</b></p>
                                 <div className='product-detail-choose-container'>
                                     {
                                         productAllDetails?.map((detail, index) => (
